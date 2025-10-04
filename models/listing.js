@@ -7,13 +7,16 @@ const listingSchema=new Schema({
         required:true
 
     },
-    discription:String,
-    image:{
-        type:String,
-        default:
-            "https://unsplash.com/photos/modern-living-room-with-abstract-art-and-plush-furniture-Wkqs3XD8JPk",
-        set:(v)=>
-            v==" "? "https://unsplash.com/photos/modern-living-room-with-abstract-art-and-plush-furniture-Wkqs3XD8JPk "  :v
+    description:String,
+    image: {
+    filename: {
+    type: String,
+    default: "listingimage",
+    },
+     url: {
+    type: String,
+    default: "https://unsplash.com/photos/modern-living-room-with-abstract-art-and-plush-furniture-Wkqs3XD8JPk",
+     },
     },
     price:Number,
     location:String,
