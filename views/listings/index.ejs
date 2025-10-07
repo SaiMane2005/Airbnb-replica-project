@@ -1,14 +1,12 @@
 <% layout("/layouts/boilerplate") -%>
 <body>
     <h3>All Listings</h3>
-    <li>
         <ul>
-            <%for(let listing of allListings){%>
+            <%for(let listing of allListings) {%>
+                 <li><a href="./listings/<%= listing._id%>"><%= listing.title  %></a></li>
                  <li><a href="./listings/<%= listing._id%>"><%= listing.title  %></a></li>
             <% } %>
         </ul>
-
-    </li>i
 
 </body>
 
