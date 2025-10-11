@@ -1,15 +1,39 @@
 <% layout("/layouts/boilerplate") -%>
 <body>
+    <div class="row">
+        <div class="col-8 offset-2">
     <h3>Edit your listing</h3>
     <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
-        <input type="text"  name="listing[title]" value="<%=listing.title%>"><br>
-        <textarea name="listing[description]"><%=listing.description%></textarea><br>
-        <input type="text" name="listing[image]" value="<%=listing.image%>"><br>
-        <input type="number" name="listing[price]" value="<%=listing.price%>"><br>
-        <input type="text"  value="<%=listing.location%>" name="listing[location]"><br>
-        <input type="text" value="<%=listing.country%>" name="listing[country]%>"><br>
-        <button>Edit</button>
+        <div>
+            <label for="title" class="form-label">Title</label>
+            <input type="text"  name="listing[title]" value="<%=listing.title%>" class="form-control"><br>
+        </div>
+        <div>
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" class="form-control"><%=listing.description%></textarea>
+        </div>
+        <div>
+            <label for="image" class="form-label">Image Link</label>
+            <input type="text" name="listing[image][url]" class="form-control"value="<%=listing.image.url%>">
+        </div>
+        <div class="row">
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="listing[price]" value="<%=listing.price%>" class="form-control"><br>
+            </div>
+            <div>
+                <label for="country" class="form-label">Country</label>
+                <input type="text" value="<%=listing.country%>" name="listing[country]%>" class="form-control"><br>
+            </div>
+        </div>
+        <div>
+            <label for="location" class="form-label">Location</label>
+            <input type="text"  value="<%=listing.location%>" name="listing[location]" class="form-control"><br>
+        </div>
+
+        <button class="btn btn-dark edit-btn">Edit</button>
 
     </form>
-
+ </div>
+    </div>
 </body>
