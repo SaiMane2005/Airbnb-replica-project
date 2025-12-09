@@ -7,7 +7,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const {listingSchema}=require("./schema.js")
+const {listingSchema}=require("./schema.js");
+const Review = require("./models/review.js");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -74,10 +75,6 @@ app.post(
     res.redirect("/listings");
   })
 );
-
-
-
-
 // Edit route
 app.get("/listings/:id/edit",wrapAsync(async (req, res) => {
   const { id } = req.params;
@@ -98,11 +95,26 @@ app.delete("/listings/:id",wrapAsync(async (req, res) => {
   await Listing.findByIdAndDelete(id);
   res.redirect("/listings");
 }));
+//Review route
+app.post("/listings/:id/reviews",async(req,res)=>{
+  let listing=await Listing.findById(req.params.id);
+  let newReview=new Review(req.body.review);
+  listing.review.push(newReview);
+
+  await newReview.save();
+  await listing.save();
+  console.log("new review saved");
+  res.send("new review saved");
 
 
+
+})
+//error handling for the not existing pages
 app.all(/.*/, (req, res, next) => {
   next(new ExpressError(404, "Page not found!"));
 });
+
+
 
 
 
