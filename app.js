@@ -70,7 +70,7 @@ app.get("/listings/new", (req, res) => {
 // Show route
 app.get("/listings/:id",wrapAsync(async (req, res) => {
   const { id } = req.params;
-  const listing = await Listing.findById(id);
+  const listing = await Listing.findById(id).populate("review");
   res.render("./listings/show.ejs", { listing });
 }));
 
@@ -114,7 +114,9 @@ app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
   await newReview.save();
   await listing.save();
   console.log("new review saved");
-  res.send("new review saved");
+  // res.send("new review saved");
+  res.redirect(`/listings/${listing._id}`);
+
 
 }))
 //error handling for the not existing pages
