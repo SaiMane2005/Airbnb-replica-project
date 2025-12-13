@@ -12,9 +12,10 @@ module.exports.listingSchema = Joi.object({
 
         // FIXED: image is an object, not a string
         image: Joi.object({
-            filename: Joi.string().allow("", null),
-            url: Joi.string().uri().allow("", null)
-        }).required()
+  filename: Joi.string().allow("", null),
+  url: Joi.string().uri().allow("", null),
+}).optional()
+
 
     }).required()
 });
