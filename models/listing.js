@@ -21,8 +21,6 @@ const listingSchema = new Schema({
         "https://unsplash.com/photos/modern-living-room-with-abstract-art-and-plush-furniture-Wkqs3XD8JPk",
     },
   },
-
-
   price: Number,
   location: String,
   country: String,
