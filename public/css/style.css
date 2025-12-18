@@ -99,3 +99,11 @@ body{
   padding-left: 0;
   padding-right: 0;
 }
+.listing-link {
+  text-decoration: none;
+  color: black;
+}
+
+.listing-link:hover {
+  color: black;
+}
