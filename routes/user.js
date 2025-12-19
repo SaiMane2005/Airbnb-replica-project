@@ -3,6 +3,7 @@ const router=express.Router();
 const User=require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const Listing = require("../models/listing.js")
 const {saveRedirectUrl}=require("../middleware")
 
 router.get("/signup",(req,res)=>{
@@ -40,8 +41,8 @@ router.post("/login",
     }),
     async(req,res)=>{//passport.authenticate is an middleware
        req.flash("success","Welcome backe to Wanderlust! ")
-    //    res.redirect("/listings")
-    res.redirect(res.locals.redirectUrl)
+      res.redirect("/listings")
+    // res.redirect(res.locals.redirectUrl);
 })
 //log out
 router.get("/logout",(req,res,next)=>{
