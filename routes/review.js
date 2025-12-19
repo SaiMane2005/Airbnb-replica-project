@@ -4,24 +4,25 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
-const {validateReview}=require("../middleware.js")
+const {isLoggedIn,isOwner,validateReview,isReviewAuthor}=require("../middleware.js")
 
 
-router.post("/",validateReview,wrapAsync(async(req,res)=>{
+
+router.post("/",isLoggedIn,validateReview,wrapAsync(async(req,res)=>{
   let listing=await Listing.findById(req.params.id);
   let newReview=new Review(req.body.review);
+  newReview.author=req.user._id;
   listing.review.push(newReview);
+  console.log(newReview);
 
   await newReview.save();
   await listing.save();
-  console.log("new review saved");
   req.flash("success","New Review Created!");
-  // res.send("new review saved");
   res.redirect(`/listings/${listing._id}`);
 }))
 
 //Delete review route
-router.delete("/:reviewID", wrapAsync(async (req, res) => {
+router.delete("/:reviewID",isLoggedIn,isReviewAuthor, wrapAsync(async (req, res) => {
   let { id, reviewID } = req.params;
   // remove review reference from listing
   await Listing.findByIdAndUpdate(id, { $pull: { review: reviewID } });//pull and delete the review id in the listing document
