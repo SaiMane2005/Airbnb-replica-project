@@ -3,7 +3,7 @@
     <div class="col-8 offset-2">
     <br>
     <h3>Create a new list</h3>
-    <form method="post" action="/listings" novalidate class="needs-validation" >
+    <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data" >
         <div class="mb-2">
             <label for="title" class="form-label">Title</label>
             <input
@@ -16,8 +16,8 @@
             <div class="invalid-feedback">Please enter a short description/div>
         </div >
         <div class="mb-2">
-            <label for="image" class="form-label">Image link</label>
-            <input type="text" name="listing[image][url]"  class="form-control" value="https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHViYWl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60"  >
+            <label for="image" class="form-label">Upload image</label>
+            <input type="file" name="listing[image][url]"  class="form-control" >
         </div>
         <div class="row">
             <div class="mb-3 col-4"  >
